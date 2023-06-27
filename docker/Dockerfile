@@ -120,8 +120,14 @@ RUN git clone https://github.com/osrf/gazebo_models ~/.gazebo/models
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
+# Install neovim, but first update the package manager  
+RUN apt-get update && apt-get install -y software-properties-common && \
+    add-apt-repository ppa:neovim-ppa/stable && \
+    apt-get update && apt-get install -y neovim
+
 # setup environment
 EXPOSE 11345
+
 
 RUN echo "alias python=/bin/python3" >> ~/.bashrc
 
