@@ -39,6 +39,7 @@ RUN apt-get update && apt-get install -y \
     curl wget \
     tk \
     spacenavd \
+    dos2unix \
     && rm -rf /var/lib/apt/lists/*
 
 # install packages
@@ -61,10 +62,12 @@ RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash \
 
 # Installing repo required for homework
 RUN /bin/bash -c "cd ~/ros_ws/src \
-               && git clone https://github.com/cambel/ur3.git ros_ur3 -b noetic-devel\
+               && git clone https://github.com/cambel/ur3.git ros_ur3 -b noetic-devel \
+               && find ros_ur3 -type f -print0 | xargs -0 dos2unix \
                && git clone https://bitbucket.org/traclabs/trac_ik.git \
                && git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git universal_robots_ros_driver \
                && git clone -b calibration_devel https://github.com/fmauch/universal_robot.git universal_robot"
+
 
 # Updating ROSDEP and installing dependencies
 RUN cd ~/ros_ws \
@@ -121,10 +124,7 @@ ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 # Install neovim, but first update the package manager  
-RUN apt-get update && apt-get install -y software-properties-common && \
-    add-apt-repository ppa:neovim-ppa/stable && \
-    apt-get update && apt-get install -y neovim
-
+RUN apt-get update && apt-get install -y neovim
 # setup environment
 EXPOSE 11345
 
