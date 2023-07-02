@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<COLcar xmlns="http://www.colcar.org/2005/11/COLcarSchema" version="1.4.1">
     <asset>
         <contributor>
             <author>VCGLab</author>
@@ -60,4 +60,4 @@
     <scene>
         <instance_visual_scene url="#VisualSceneNode"/>
     </scene>
-</COLLADA>
+</COLcar>
