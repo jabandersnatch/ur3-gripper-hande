@@ -62,7 +62,7 @@ RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash \
 
 # Installing repo required for homework
 RUN /bin/bash -c "cd ~/ros_ws/src \
-               && git clone https://github.com/cambel/ur3.git ros_ur3 -b noetic-devel \
+               && git clone https://github.com/jabandersnatch/ur3-gripper-hande ros_ur3 -b noetic-devel \
                && find ros_ur3 -type f -print0 | xargs -0 dos2unix \
                && git clone https://bitbucket.org/traclabs/trac_ik.git \
                && git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git universal_robots_ros_driver \
