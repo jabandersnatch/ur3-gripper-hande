@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<sdf version='1.7'>
+  <model name='car'>
+    <link name='dummy'>
+      <inertial>
+        <pose>-1e-06 -0.000109 0.019502 0 -0 0</pose>
+        <mass>0.150621</mass>
+        <inertia>
+          <ixx>0.000169</ixx>
+          <ixy>3.23117e-27</ixy>
+          <ixz>0</ixz>
+          <iyy>3.9e-05</iyy>
+          <iyz>2e-06</iyz>
+          <izz>0.000189</izz>
+        </inertia>
+      </inertial>
+      <collision name='dummy_fixed_joint_lump__base_link_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://car/meshes/base_link.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='dummy_fixed_joint_lump__base_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://car/meshes/base_link.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

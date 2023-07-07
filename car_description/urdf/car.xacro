@@ -4,6 +4,8 @@
 <xacro:include filename="$(find car_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find car_description)/urdf/car.trans" />
 <xacro:include filename="$(find car_description)/urdf/car.gazebo" />
+<link name ="dummy">
+</link>
 <link name="base_link">
   <inertial>
     <origin xyz="-1.3177781093992687e-06 -0.00010949367714351344 0.01950178790282552" rpy="0 0 0"/>

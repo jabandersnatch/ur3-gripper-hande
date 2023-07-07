@@ -73,7 +73,7 @@
 
   <!-- Gripper -->
 
-  <xacro:arg name="grasp_plugin" default="false" />
+  <xacro:arg name="grasp_plugin" default="true"/>
   <xacro:include filename="$(find robotiq_description)/urdf/robotiq_hande_gripper.urdf.xacro" />
   
   <!-- Robotiq Coupler -->
