@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find car_spawner)/worlds/empty.world"/>
+  </include>
+
+  <node name="spawn_cars" pkg="car_spawner" type="spawn_cars.py" output="screen"/>
+</launch>
