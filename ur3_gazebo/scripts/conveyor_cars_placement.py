@@ -90,12 +90,13 @@ if __name__ == '__main__':
     car_spawner = CarSpawner()
 
     # Spawn 10 cars
-    for i in range(10):
+    for i in range(5):
         # Create a random pose for the car
         car_pose = Pose()
-        car_pose.position.x = 2 * (rospy.get_param('spawn_radius', 1) * random.random() - 0.5)
-        car_pose.position.y = 2 * (rospy.get_param('spawn_radius', 1) * random.random() - 0.5)
-        car_pose.position.z = 0.1
+        # car_pose.position.y = 2 * (rospy.get_param('spawn_radius', 0.3) * random.random() - 0.5)
+        car_pose.position.z = 0.805
+        car_pose.position.x = -1.3 * (rospy.get_param('spawn_radius', 0.3) * random.random() - 0.5)
+        car_pose.position.y = -0.25
         car_pose.orientation.x = 0
         car_pose.orientation.y = 0
         car_pose.orientation.z = 0
@@ -112,20 +113,31 @@ if __name__ == '__main__':
 
 
     # move all cars  forward
-    for i in range(10):
+    for i in range(5):
         wrench = ApplyBodyWrenchRequest()
         wrench.reference_frame = 'world'
         wrench.reference_point.x = 0
         wrench.reference_point.y = 0
         wrench.reference_point.z = 0
         wrench.wrench.force.x = 0
-        wrench.wrench.force.y = 2
+        wrench.wrench.force.y = 1.5
         wrench.wrench.force.z = 0
         wrench.start_time = rospy.Time.now()
         wrench.duration = rospy.Duration(1)
         car_name = 'car' + str(i) + '::dummy'
 
         car_spawner.wrench(car_name, wrench)
+
+    rospy.sleep(5)
+    # Delete all cars
+    for i in range(5):
+        car_spawner.delete('car' + str(i))
+        rospy.loginfo('Deleted car{0}'.format(i))
+
+    rospy.sleep(10)
+
+    # print the names of all models
+    rospy.loginfo('Model names: {0}'.format(car_spawner.get_model_names()))
 
 
 

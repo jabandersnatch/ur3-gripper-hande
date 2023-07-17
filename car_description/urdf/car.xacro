@@ -4,13 +4,11 @@
 <xacro:include filename="$(find car_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find car_description)/urdf/car.trans" />
 <xacro:include filename="$(find car_description)/urdf/car.gazebo" />
-<link name ="dummy">
-</link>
 <link name="base_link">
   <inertial>
-    <origin xyz="-1.3177781093992687e-06 -0.00010949367714351344 0.01950178790282552" rpy="0 0 0"/>
-    <mass value="0.15062139647989656"/>
-    <inertia ixx="0.000169" iyy="3.9e-05" izz="0.000189" ixy="-0.0" iyz="2e-06" ixz="0.0"/>
+    <origin xyz="-1.3149495592561766e-06 -8.379283819793052e-05 0.019418162162241057" rpy="0 0 0"/>
+    <mass value="0.13498751369293807"/>
+    <inertia ixx="0.000152" iyy="3e-05" izz="0.000165" ixy="-0.0" iyz="2e-06" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -26,7 +24,8 @@
     </geometry>
   </collision>
 </link>
-
+<link name ="dummy">
+</link>
  <joint name="dummy_joint" type="fixed">
      <parent link="dummy"/>
      <child link="base_link"/>
