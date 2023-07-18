@@ -4,8 +4,8 @@ import random
 import rospy
 from gazebo_msgs.srv import SpawnModel, DeleteModel, ApplyBodyWrench, ApplyBodyWrenchRequest
 from gazebo_msgs.msg import ModelStates
-from geometry_msgs.msg import Pose 
-import os 
+from geometry_msgs.msg import Pose
+import os
 import rospkg
 
 '''
@@ -52,9 +52,6 @@ class CarSpawner(object):
         # Spawn the car
         if self.spawn_car is not None:
             self.spawn_car(car_name, car_xml, 'car_description', car_pose, 'world')
-
-
-
         # Publish the car's pose
         self.car_pose_pub.publish(car_pose)
 
@@ -63,12 +60,13 @@ class CarSpawner(object):
         # Delete the car
         self.delete_car(car_name)
 
-    # Wrench a car  
+    # Wrench a car
     def wrench(self, car_name, wrench):
         # Wrench the car
         if self.wrench_car is not None:
             # The arguments are body_name, reference_frame, reference_point, wrench, start_time, duration
-            self.wrench_car(car_name, wrench.reference_frame, wrench.reference_point, wrench.wrench, wrench.start_time, wrench.duration)
+            self.wrench_car(car_name, wrench.reference_frame, wrench.reference_point, wrench.wrench,
+                            wrench.start_time, wrench.duration)
 
     def get_model_names(self):
         try:
@@ -81,6 +79,7 @@ class CarSpawner(object):
         except rospy.ROSException:
             rospy.logerr('Failed to retrieve model names from /gazebo/model_states topic.')
             return []
+
 if __name__ == '__main__':
     '''
     I want to spawn 10 cars on random positions in the gazebo environment. the positions may vary from (x,y) = (-1, -1) to (1,1) = (1, 1). meters.
@@ -89,56 +88,44 @@ if __name__ == '__main__':
     # Create a car spawner object
     car_spawner = CarSpawner()
 
-    # Spawn 10 cars
+    # Spawn and move cars repeatedly
     for i in range(5):
-        # Create a random pose for the car
+        # Spawn a car
         car_pose = Pose()
-        # car_pose.position.y = 2 * (rospy.get_param('spawn_radius', 0.3) * random.random() - 0.5)
         car_pose.position.z = 0.805
-        car_pose.position.x = -1.3 * (rospy.get_param('spawn_radius', 0.3) * random.random() - 0.5)
+        car_pose.position.x = -1.3 * (rospy.get_param('spawn_radius', 0.25) * random.random() - 0.5)
         car_pose.position.y = -0.25
         car_pose.orientation.x = 0
         car_pose.orientation.y = 0
         car_pose.orientation.z = 0
         car_pose.orientation.w = 1
-        # Spawn the car
         car_spawner.spawn('car' + str(i), car_pose)
-        # Ros log the car name and pose
         rospy.loginfo('Spawned car{0} at {1}'.format(i, car_pose))
 
-    rospy.sleep(10)
-
-    # print the names of all models
-    rospy.loginfo('Model names: {0}'.format(car_spawner.get_model_names()))
-
-
-    # move all cars  forward
-    for i in range(5):
+        # Apply wrench to move the car
         wrench = ApplyBodyWrenchRequest()
         wrench.reference_frame = 'world'
         wrench.reference_point.x = 0
         wrench.reference_point.y = 0
         wrench.reference_point.z = 0
         wrench.wrench.force.x = 0
-        wrench.wrench.force.y = 1.5
+        wrench.wrench.force.y = 1.35
         wrench.wrench.force.z = 0
         wrench.start_time = rospy.Time.now()
-        wrench.duration = rospy.Duration(1)
+        wrench.duration = rospy.Duration(3)
         car_name = 'car' + str(i) + '::dummy'
-
         car_spawner.wrench(car_name, wrench)
 
-    rospy.sleep(5)
-    # Delete all cars
-    for i in range(5):
+        # delete the cars after 2 seconds
+
+        rospy.sleep(2)
+
         car_spawner.delete('car' + str(i))
         rospy.loginfo('Deleted car{0}'.format(i))
 
-    rospy.sleep(10)
 
-    # print the names of all models
+
+        rospy.sleep(5)  # Wait for 5 seconds before spawning the next car
+
+    # Print the names of all models
     rospy.loginfo('Model names: {0}'.format(car_spawner.get_model_names()))
-
-
-
-# Path: src/ros_ur3/car_spawner/launch/spawn_cars.launch
