@@ -143,7 +143,7 @@
       grasp_plugin True = custom gazebo_grasp_fix
       grasp_plugin False = gazebo_gripper 
   -->
-  <xacro:if value="$(arg grasp_plugin)">
+  <xacro:if value="true">
     <gazebo>
       <plugin name="gazebo_grasp_fix" filename="libgazebo_grasp_fix.so">
             <arm>
@@ -162,7 +162,7 @@
         </plugin>
     </gazebo>
   </xacro:if>
-  <xacro:unless value="$(arg grasp_plugin)">
+  <xacro:unless value="true">
     <gazebo>
       <gripper name="gazebo_gripper">
         <grasp_check>

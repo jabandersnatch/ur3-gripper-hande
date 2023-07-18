@@ -33,7 +33,7 @@
   <!-- Load urdf on the parameter server -->
   <include file="$(arg robot_description_file)">
     <arg name="ur_robot" value="$(arg ur_robot)"/>
-    <arg name="grasp_plugin" value="$(arg grasp_plugin)"/>
+    <arg name="grasp_plugin" value="true"/>
   </include>
   <!-- Spawn robot in gazebo (and move it upwards):
        better initial values should be -2.355 and 1.57 but the robot does

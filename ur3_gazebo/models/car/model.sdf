@@ -3,15 +3,15 @@
   <model name='car'>
     <link name='dummy'>
       <inertial>
-        <pose>-1e-06 -0.000109 0.019502 0 -0 0</pose>
+        <pose>--1.3149495592561766e-06 -8.379283819793052e-05 0.019418162162241057 0 -0 0</pose>
         <mass>0.150621</mass>
         <inertia>
-          <ixx>0.000169</ixx>
-          <ixy>3.23117e-27</ixy>
-          <ixz>0</ixz>
-          <iyy>3.9e-05</iyy>
-          <iyz>2e-06</iyz>
-          <izz>0.000189</izz>
+          <ixx>0.000152</ixx>
+          <ixy>0</ixy>
+          <ixz>2e-06</ixz>
+          <iyy>3e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0.000165</izz>
         </inertia>
       </inertial>
       <collision name='dummy_fixed_joint_lump__base_link_collision'>
