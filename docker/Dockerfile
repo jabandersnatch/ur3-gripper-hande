@@ -68,6 +68,12 @@ RUN /bin/bash -c "cd ~/ros_ws/src \
                && git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git universal_robots_ros_driver \
                && git clone -b calibration_devel https://github.com/fmauch/universal_robot.git universal_robot"
 
+RUN /bin/bash -c "cd ~/ros_ws/src \
+               && git clone https://github.com/JenniferBuehler/general-message-pkgs.git \
+               && git clone clone https://github.com/JenniferBuehler/gazebo-pkgs.git"
+
+RUN /bin/bash -c "cd ~/ros_ws/src \
+               && chmod +x ros_ur3/ur3_gazebo/scripts/*"
 
 # Updating ROSDEP and installing dependencies
 RUN cd ~/ros_ws \

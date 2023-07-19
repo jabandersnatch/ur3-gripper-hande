@@ -6,16 +6,16 @@
 <xacro:include filename="$(find car_description)/urdf/car.gazebo" />
 <link name="base_link">
   <inertial>
-    <origin xyz="-1.3149495592561766e-06 -8.379283819793052e-05 0.019418162162241057" rpy="0 0 0"/>
-    <mass value="0.13498751369293807"/>
-    <inertia ixx="0.000152" iyy="3e-05" izz="0.000165" ixy="-0.0" iyz="2e-06" ixz="0.0"/>
+    <origin xyz="1.0161376409608881e-16 -0.00018301107250346684 0.019921769525778" rpy="0 0 0"/>
+    <mass value="0.9441386315697112"/>
+    <inertia ixx="0.001045" iyy="0.000193" izz="0.001109" ixy="0.0" iyz="1.4e-05" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://car_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="red"/>
   </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
