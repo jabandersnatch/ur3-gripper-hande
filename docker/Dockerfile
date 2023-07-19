@@ -70,7 +70,7 @@ RUN /bin/bash -c "cd ~/ros_ws/src \
 
 RUN /bin/bash -c "cd ~/ros_ws/src \
                && git clone https://github.com/JenniferBuehler/general-message-pkgs.git \
-               && git clone clone https://github.com/JenniferBuehler/gazebo-pkgs.git"
+               && git clone https://github.com/JenniferBuehler/gazebo-pkgs.git"
 
 RUN /bin/bash -c "cd ~/ros_ws/src \
                && chmod +x ros_ur3/ur3_gazebo/scripts/*"
