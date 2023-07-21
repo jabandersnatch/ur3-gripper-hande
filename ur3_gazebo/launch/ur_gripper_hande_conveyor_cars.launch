@@ -50,5 +50,8 @@
               -unpause"
         output="screen" />
 
+  <!--Spawn logi_camera from the logi_camera on top of the conveyor approximally 1 meter affar set camera facing down-->     
+  <param name="camera_description" command="$(find xacro)/xacro --inorder $(find logi_camera)/urdf/camera.xacro" />
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param camera_description -urdf -model front_camera -x 0.5 -y 0.0 -z 1.5 -Y 0.0 -unpause" />
 
 </launch>

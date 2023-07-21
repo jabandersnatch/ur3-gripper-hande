@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="front_camera">
+  <xacro:include filename="$(find logi_camera)/urdf/camera.gazebo"/>
+  <!-- Camera -->
+  <link name="base_link">
+  </link>
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://logi_camera/meshes/head.dae" scale=".5 .5 .5"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://logi_camera/meshes/head.stl" scale=".5 .5 .5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.10"/>
+      <inertia ixx="0.03" ixy="0.0" ixz="0.0" iyy="0.03" iyz="0.0" izz="0.03"/>
+    </inertial>
+  </link>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0 0 0" rpy="0 1.5708  0"/>
+  </joint>
+    
+</robot>

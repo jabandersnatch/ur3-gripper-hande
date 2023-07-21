@@ -112,7 +112,7 @@ if __name__ == '__main__':
         wrench.wrench.force.y = 10
         wrench.wrench.force.z = 0
         wrench.start_time = rospy.Time.now()
-        wrench.duration = rospy.Duration(2.3)
+        wrench.duration = rospy.Duration(2,30)
         car_name = 'car' + str(i) + '::dummy'
         car_spawner.wrench(car_name, wrench)
 
