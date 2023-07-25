@@ -3,7 +3,7 @@
 import random
 import rospy
 from gazebo_msgs.srv import SpawnModel, DeleteModel, ApplyBodyWrench, ApplyBodyWrenchRequest
-from gazebo_msgs.msg import ModelStates
+from gazebo_msgs.msg import ModelStates, ModelState
 from geometry_msgs.msg import Pose
 import os
 import rospkg
@@ -49,7 +49,7 @@ class CarSpawner(object):
         # Open the car model file
         with open(self.path_to_car, 'r') as car_file:
             car_xml = car_file.read()
-        # Spawn the car
+
         if self.spawn_car is not None:
             self.spawn_car(car_name, car_xml, 'car_description', car_pose, 'world')
         # Publish the car's pose
@@ -82,14 +82,19 @@ class CarSpawner(object):
 
 if __name__ == '__main__':
     '''
-    I want to spawn 10 cars on random positions in the gazebo environment. the positions may vary from (x,y) = (-1, -1) to (1,1) = (1, 1). meters.
+    For 5 one minute spawn every 5 seconds a new car
     '''
+
+    rospy.sleep(20)
 
     # Create a car spawner object
     car_spawner = CarSpawner()
 
+    total_spawns=24
+    spawn_interval=rospy.Duration(5)
+
     # Spawn and move cars repeatedly
-    for i in range(5):
+    for i in range(total_spawns):
         # Spawn a car
         car_pose = Pose()
         car_pose.position.z = 0.805
@@ -120,12 +125,11 @@ if __name__ == '__main__':
 
         rospy.sleep(2)
 
+        # Print the names of all models
         car_spawner.delete('car' + str(i))
         rospy.loginfo('Deleted car{0}'.format(i))
 
+        rospy.sleep(spawn_interval.to_sec())
 
 
-        rospy.sleep(5)  # Wait for 5 seconds before spawning the next car
 
-    # Print the names of all models
-    rospy.loginfo('Model names: {0}'.format(car_spawner.get_model_names()))
