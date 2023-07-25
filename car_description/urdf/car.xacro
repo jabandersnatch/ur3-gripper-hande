@@ -3,7 +3,6 @@
 
 <xacro:include filename="$(find car_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find car_description)/urdf/car.trans" />
-<xacro:include filename="$(find car_description)/urdf/car.gazebo" />
 <link name="base_link">
   <inertial>
     <origin xyz="1.0161376409608881e-16 -0.00018301107250346684 0.019921769525778" rpy="0 0 0"/>
@@ -15,7 +14,6 @@
     <geometry>
       <mesh filename="package://car_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="red"/>
   </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -26,9 +24,17 @@
 </link>
 <link name ="dummy">
 </link>
- <joint name="dummy_joint" type="fixed">
+<joint name="dummy_joint" type="fixed">
      <parent link="dummy"/>
      <child link="base_link"/>
-  </joint>
+</joint>
+
+<gazebo reference="base_link">
+  <material>Gazebo/Red</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <selfCollide>true</selfCollide>
+  <gravity>true</gravity>
+</gazebo>
 
 </robot>
