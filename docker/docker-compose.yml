@@ -1,4 +1,4 @@
-version: "2.4"
+version: "2.5"
 
 ################################################################################
 
@@ -41,4 +41,7 @@ services:
       - /dev/:/dev/
     network_mode: host
     command: tail -f /dev/null
-
+    ulimits:
+      nofile:
+        soft: 524288
+        hard: 524288
