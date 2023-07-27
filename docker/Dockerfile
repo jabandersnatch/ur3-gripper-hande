@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install -y \
     python3-setuptools \
     python3-tk \
     python3-numpy \
+    python3-pymodbus \
     # utils
     locate \
     aptitude \
