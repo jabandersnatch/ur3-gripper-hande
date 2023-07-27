@@ -27,7 +27,7 @@ except ImportError:
 
 
 class GripperController(object):
-    def __init__(self, namespace='', prefix=None, timeout=5.0, attach_link='robot::wrist_3_link'):
+    def __init__(self, namespace='', prefix=None, timeout=5, attach_link='robot::wrist_3_link'):
         self.ns = utils.solve_namespace(namespace)
         self.prefix = prefix if prefix is not None else ''
         node_name = "gripper_controller"
@@ -74,7 +74,7 @@ class GripperController(object):
             if rospy.is_shutdown():
                 return
 
-        attach_plugin = rospy.get_param("grasp_plugin", default=False)
+        attach_plugin = rospy.get_param("grasp_plugin", default=True)
         if attach_plugin:
             try:
                 # gazebo_ros link attacher
@@ -184,7 +184,7 @@ class GripperController(object):
     def stop(self):
         self._client.cancel_goal()
 
-    def wait(self, timeout=15.0):
+    def wait(self, timeout=15):
         return self._client.wait_for_result(timeout=rospy.Duration(timeout))
 
     def get_position(self):
@@ -274,7 +274,7 @@ class RobotiqGripper():
         self.gripper.send_goal(goal)
         rospy.logdebug("Sending command " + str(command) + " to gripper: " + self.ns)
         if wait:
-            self.gripper.wait_for_result(rospy.Duration(5.0))  # Default wait time: 5 s
+            self.gripper.wait_for_result(rospy.Duration(5))  # Default wait time: 5 s
             result = self.gripper.get_result()
             return True if result else False
         else:
@@ -483,7 +483,7 @@ class JointTrajectoryController(JointControllerBase):
         the acceleration level.
     """
 
-    def __init__(self, publisher_name='arm_controller', namespace='', timeout=5.0, joint_names=None):
+    def __init__(self, publisher_name='arm_controller', namespace='', timeout=5, joint_names=None):
         """
         JointTrajectoryController constructor. It creates the C{SimpleActionClient}.
         @type namespace: string
@@ -595,7 +595,7 @@ class JointTrajectoryController(JointControllerBase):
         """
         self._goal.trajectory.points = copy.deepcopy(trajectory.points)
 
-    def start(self, delay=0.1, wait=False):
+    def start(self, delay=100, wait=False):
         """
         Starts the trajectory. It sends the C{FollowJointTrajectoryGoal} to the action server.
         @type  delay: float
@@ -603,7 +603,7 @@ class JointTrajectoryController(JointControllerBase):
         """
         num_points = len(self._goal.trajectory.points)
         rospy.logdebug('Executing Joint Trajectory with {0} points'.format(num_points))
-        self._goal.trajectory.header.stamp = rospy.Time.now() + rospy.Duration(delay)
+        self._goal.trajectory.header.stamp = rospy.Time.now() + rospy.Duration(0,100)
         if wait:
             self._client.send_goal_and_wait(self._goal)
         else:
@@ -615,7 +615,7 @@ class JointTrajectoryController(JointControllerBase):
         """
         self._client.cancel_goal()
 
-    def wait(self, timeout=15.0):
+    def wait(self, timeout=15):
         """
         Waits synchronously (with a timeout) until the trajectory action server gives a result.
         @type  timeout: float

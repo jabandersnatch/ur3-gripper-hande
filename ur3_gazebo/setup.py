@@ -4,8 +4,8 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-    packages=['ur_gazebo'],
-    package_dir={'': 'src'}
+    packages=['ur3_gazebo'],
+    package_dir={'': 'scripts'}
 )
 
 setup(**d)

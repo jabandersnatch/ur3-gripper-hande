@@ -205,7 +205,7 @@ See help inside the example with the '?' key for key bindings.
 
     global arm
     arm = Arm(ft_sensor=False,
-              gripper=use_gripper, namespace=ns,
+              gripper='simple', namespace=ns,
               joint_names_prefix=joints_prefix,
               robot_urdf=robot_urdf, robot_urdf_package=rospackage,
               ee_link=tcp_link)

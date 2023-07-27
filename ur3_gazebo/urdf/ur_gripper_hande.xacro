@@ -73,7 +73,7 @@
 
   <!-- Gripper -->
 
-  <xacro:arg name="grasp_plugin" default="true"/>
+  <xacro:arg name="grasp_plugin" default="false"/>
   <xacro:include filename="$(find robotiq_description)/urdf/robotiq_hande_gripper.urdf.xacro" />
   
   <!-- Robotiq Coupler -->
@@ -152,12 +152,12 @@
               <gripper_link>hande_right_finger</gripper_link>
               <gripper_link>hande_left_finger</gripper_link>
             </arm>
-          <forces_angle_tolerance>100</forces_angle_tolerance>
+          <forces_angle_tolerance>120</forces_angle_tolerance>
           <update_rate>100</update_rate>
-          <grip_count_threshold>2</grip_count_threshold>
-          <max_grip_count>2</max_grip_count>
-          <release_tolerance>0.0015</release_tolerance>
-          <disable_collisions_on_attach>true</disable_collisions_on_attach>
+          <grip_count_threshold>5</grip_count_threshold>
+          <max_grip_count>30</max_grip_count>
+          <release_tolerance>0.005</release_tolerance>
+          <disable_collisions_on_attach>false</disable_collisions_on_attach>
           <contact_topic>__default_topic__</contact_topic>
         </plugin>
     </gazebo>
